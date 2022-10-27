@@ -1,4 +1,4 @@
-# cnki_getBibTeX
+# getCnkiLiteratureBibTex
 
 >从知网文献中直接复制BibTeX
 
