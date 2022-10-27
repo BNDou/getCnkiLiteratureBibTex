@@ -31,8 +31,8 @@
             var input = document.createElement('li')
             input.setAttribute("id", "bibbtn")
             input.setAttribute("class", "btn-note")
-            input.setAttribute("title", "Bibtex")
-            input.innerHTML = ">>Bibtex<<"
+            input.setAttribute("title", "BibTex")
+            input.innerHTML = ">>BibTex<<"
             input.style = "width: 72px;height: 23px;cursor: pointer;color: #e8e6e3;"
             x[0].children[0].append(input)
 
