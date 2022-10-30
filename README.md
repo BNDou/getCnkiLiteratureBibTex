@@ -1,3 +1,11 @@
+<!--
+ * @Author: BNDou
+ * @Date: 2022-10-28 00:21:23
+ * @LastEditTime: 2022-10-30 21:58:33
+ * @FilePath: \getCnkiLiteratureBibTex\README.md
+ * @Description:
+-->
+
 # getCnkiLiteratureBibTex
 
 > 从知网文献中直接复制 BibTeX
