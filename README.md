@@ -1,16 +1,16 @@
 <!--
  * @Author: BNDou
  * @Date: 2022-10-28 00:21:23
- * @LastEditTime: 2022-10-30 21:58:33
+ * @LastEditTime: 2024-05-15 05:34:33
  * @FilePath: \getCnkiLiteratureBibTex\README.md
  * @Description:
 -->
 
 # getCnkiLiteratureBibTex
 
-> 从知网文献中直接复制 BibTeX
+> 从知网文献中直接复制bibtex，无需跳转页面等繁琐步骤
 
-> 获取 BibTex 由知网提供的 NodeExpress 转化而来
+> 得到bibtex为知网提供的官方接口提取而来，实际使用时根据个人需求请自行编辑
 
 > 实际使用时根据个人需求请自行编辑
 
