@@ -1,7 +1,7 @@
 <!--
  * @Author: BNDou
  * @Date: 2022-10-28 00:21:23
- * @LastEditTime: 2024-05-20 01:27:36
+ * @LastEditTime: 2024-05-20 01:45:30
  * @FilePath: \getCnkiLiteratureBibTex\README.md
  * @Description:
 -->
@@ -16,11 +16,11 @@
 
 ## 安装
 
-> 油猴挂载——[点击进入 GreasyFork 直链安装](https://greasyfork.org/zh-CN/scripts/444428-知网-文献-bibtex提取 "前往安装")
+油猴挂载——[点击进入 GreasyFork 直链安装](https://greasyfork.org/zh-CN/scripts/444428-知网-文献-bibtex提取 "前往安装")
 
 ## 使用方法
 
-> 打开相关文献，右上角出现“BibTex”的图标（如下图），点击即可复制到剪切板
+打开相关文献，右上角出现“BibTex”的图标（如下图），点击即可复制到剪切板
 
 ![BibTex图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex/img/BibTex.png "“BibTex”图标")
 
