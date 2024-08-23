@@ -1,7 +1,7 @@
 <!--
  * @Author: BNDou
  * @Date: 2022-10-28 00:21:23
- * @LastEditTime: 2024-08-24 04:38:42
+ * @LastEditTime: 2024-08-24 05:39:55
  * @FilePath: \getCnkiLiteratureBibTex\README.md
  * @Description:
 -->
@@ -22,11 +22,11 @@
 
 打开相关文献，右上角出现“BibTex”的图标（如下图），点击即可复制到剪切板
 
-![BibTex图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex/img/BibTex.png "“BibTex”图标")
+![BibTex图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex.png "“BibTex”图标")
 
 或者点击插件菜单栏中的复制按钮（如下图），即可复制到剪切板
 
-![BibTex1图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex/img/BibTex1.png "“BibTex”图标")
+![BibTex1图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex1.png "“BibTex”图标")
 
 ## 项目声明
 
