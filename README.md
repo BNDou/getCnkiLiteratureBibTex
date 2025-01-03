@@ -12,7 +12,22 @@
 
 1. 油猴脚本，用于从知网文献中提取bibtex，无需跳转页面等繁琐步骤。
 2. 得到bibtex为知网提供的官方接口提取而来。
-3. 实际使用时根据个人需求请自行编辑。
+3. 界面美观，操作简单，复制即用。
+
+## 功能特点
+
+1. 现代化UI设计
+   - 精心设计的按钮样式
+   - 平滑的动画过渡效果
+   - 清晰的视觉反馈
+2. 交互体验
+   - 一键复制功能
+   - 复制成功动画提示
+   - 悬停效果增强
+3. 使用便捷
+   - 支持菜单栏快捷操作
+   - 页面内按钮直接点击
+   - 自动检测文献信息
 
 ## 安装
 
@@ -20,13 +35,23 @@
 
 ## 使用方法
 
-打开相关文献，右上角出现“BibTex”的图标（如下图），点击即可复制到剪切板
+### 方法一：页面按钮
+在文献页面右上角，您会看到一个现代化的"📋 BibTex"按钮（如下图）。点击即可复制文献的BibTex信息到剪贴板，并获得即时的复制成功反馈。
 
-![BibTex图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex.png "“BibTex”图标")
+![BibTex按钮](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex.png "BibTex按钮")
 
-或者点击插件菜单栏中的复制按钮（如下图），即可复制到剪切板
+### 方法二：菜单栏
+点击油猴插件菜单中的"📋 复制BibTex"选项（如下图），同样可以快速复制BibTex信息。
 
-![BibTex1图标](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex1.png "“BibTex”图标")
+![菜单栏按钮](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex1.png "菜单栏按钮")
+
+## 更新日志
+
+### v3.0.0
+- 全新现代化UI设计
+- 添加复制成功动画效果
+- 优化按钮交互体验
+- 改进代码结构和性能
 
 ## 项目声明
 

@@ -2,7 +2,7 @@
 // @name         知网-文献-bibtex提取
 // @description  从知网文献中直接复制bibtex
 // @author       BN_Dou
-// @version      2.2.0
+// @version      3.0.0
 // @namespace    https://github.com/BNDou/getCnkiLiteratureBibTex
 // @match        https://greasyfork.org/zh-CN/users/883089-bndou
 // @match        https://kns.cnki.net/kcms2/article/abstract?v=*
@@ -20,65 +20,138 @@
 (function () {
     'use strict';
 
-    var bibtex;
+    // 样式定义
+    const STYLES = {
+        button: `
+            width: 85px;
+            height: 32px;
+            border-radius: 16px;
+            background-color: #E3170D;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(227, 23, 13, 0.3);
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        `,
+        successAnimation: `
+            @keyframes successPulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `
+    };
 
-    //添加菜单按钮
-    GM_registerMenuCommand('⭕BibTex复制', copyBibTex);
+    let bibtex = '';
 
-    //添加页面按钮
-    var otherButtons = document.getElementsByClassName('other-btns')[0];
-    var new_ul = document.createElement('ul');
-    var button = document.createElement('button');
-    button.id = "bibbtn";
-    button.title = "BibTex"
-    // 设置其他按钮的属性和样式
-    button.innerHTML = "⭕BibTex";
-    button.style = "width: 80px; height: 25px; border-radius: 8px; background-color: #4CAF50; border: none; color: white; font-size: 16px; font-weight: bold; text-align: center; cursor: pointer; float: right;";
-    button.onmouseover = function () { this.style.backgroundColor = '#3e8e41'; };
-    button.onmouseout = function () { this.style.backgroundColor = '#4CAF50'; };
-    new_ul.appendChild(button);
-    otherButtons.appendChild(new_ul);
-
-    // 获取BibTex
-    getBibTex();
-
-    //按下页面按钮
-    $("#bibbtn").click(copyBibTex);
-
-    // 获取BibTex
-    function getBibTex(){
-        // 定义请求参数
-        const params = {
-            FileName: document.getElementById("paramdbname").getAttribute("value") + '!' + document.getElementById("paramfilename").getAttribute("value") + '!1!0',
-            DisplayMode: 'BibTex',
-            OrderParam: 0,
-            OrderType: 'desc',
-        };
-
-        // 发送 POST 请求
-        fetch('https://kns.cnki.net/dm/api/ShowExport', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Referer': 'https://kns.cnki.net/dm/manage/export.html',
-            },
-            body: new URLSearchParams(params),
-        })
-            .then(response => response.text())
-            .then(data => {
-            // 将响应内容存储到 bibtex 变量中
-            bibtex = data.match(/<li>(.*?)<\/li>/s)[1].replace(/<br>/g, '');
-        }).catch(error => console.error(error));
+    // 创建并注入样式
+    function injectStyles() {
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = STYLES.successAnimation;
+        document.head.appendChild(styleSheet);
     }
 
-    // 复制BibTex
+    // 创建按钮
+    function createButton() {
+        const button = document.createElement('button');
+        button.id = "bibbtn";
+        button.title = "点击复制BibTex";
+        button.innerHTML = '<span>📋 BibTex</span>';
+        button.style.cssText = STYLES.button;
+        
+        // 添加悬停效果
+        button.addEventListener('mouseover', () => {
+            button.style.backgroundColor = '#B31208';
+            button.style.transform = 'translateY(-1px)';
+            button.style.boxShadow = '0 4px 12px rgba(227, 23, 13, 0.4)';
+        });
+        
+        button.addEventListener('mouseout', () => {
+            button.style.backgroundColor = '#E3170D';
+            button.style.transform = 'translateY(0)';
+            button.style.boxShadow = '0 2px 8px rgba(227, 23, 13, 0.3)';
+        });
+
+        return button;
+    }
+
+    // 显示复制成功提示
+    function showCopySuccess(button) {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span>✅ 已复制</span>';
+        button.style.animation = 'successPulse 0.5s ease';
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.animation = '';
+        }, 1500);
+    }
+
+    // 获取BibTex数据
+    async function getBibTex() {
+        try {
+            const params = {
+                FileName: document.getElementById("paramdbname").getAttribute("value") + '!' + 
+                         document.getElementById("paramfilename").getAttribute("value") + '!1!0',
+                DisplayMode: 'BibTex',
+                OrderParam: 0,
+                OrderType: 'desc',
+            };
+
+            const response = await fetch('https://kns.cnki.net/dm/api/ShowExport', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Referer': 'https://kns.cnki.net/dm/manage/export.html',
+                },
+                body: new URLSearchParams(params),
+            });
+
+            const data = await response.text();
+            bibtex = data.match(/<li>(.*?)<\/li>/s)[1].replace(/<br>/g, '');
+        } catch (error) {
+            console.error('获取BibTex失败:', error);
+        }
+    }
+
+    // 复制BibTex到剪贴板
     function copyBibTex() {
         if (bibtex) {
-            console.log(bibtex);
-            // 将内容复制到粘贴板
-            GM_setClipboard(bibtex)
-            //navigator.clipboard.writeText(bibtex);
-        };
+            GM_setClipboard(bibtex);
+            showCopySuccess(document.getElementById('bibbtn'));
+        }
     }
 
+    // 初始化
+    function initialize() {
+        injectStyles();
+        
+        // 添加菜单按钮
+        GM_registerMenuCommand('📋 复制BibTex', copyBibTex);
+
+        // 添加页面按钮
+        const otherButtons = document.getElementsByClassName('other-btns')[0];
+        const new_ul = document.createElement('ul');
+        const button = createButton();
+        
+        new_ul.appendChild(button);
+        otherButtons.appendChild(new_ul);
+
+        // 获取BibTex数据
+        getBibTex();
+
+        // 绑定点击事件
+        $("#bibbtn").click(copyBibTex);
+    }
+
+    // 启动脚本
+    initialize();
 })();
