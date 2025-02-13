@@ -1,7 +1,7 @@
 <!--
  * @Author: BNDou
  * @Date: 2022-10-28 00:21:23
- * @LastEditTime: 2024-08-24 05:39:55
+ * @LastEditTime: 2025-02-13 21:03:25
  * @FilePath: \getCnkiLiteratureBibTex\README.md
  * @Description:
 -->
@@ -35,17 +35,35 @@
 
 ## 使用方法
 
-### 方法一：页面按钮
+### 方法一：文献页
 在文献页面右上角，您会看到一个现代化的"📋 BibTex"按钮（如下图）。点击即可复制文献的BibTex信息到剪贴板，并获得即时的复制成功反馈。
 
 ![BibTex按钮](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex.png "BibTex按钮")
 
-### 方法二：菜单栏
+### 方法二：高级检索页
+在高级检索页面点击检索后，您会看到一个"批量复制BibTex"按钮和若干个"📋 BibTex"按钮（如下图）。点击即可复制文献的BibTex信息到剪贴板，并获得即时的复制成功反馈。
+
+![BibTex按钮](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex2.png "BibTex按钮")
+
+### 方法三：菜单栏
 点击油猴插件菜单中的"📋 复制BibTex"选项（如下图），同样可以快速复制BibTex信息。
 
 ![菜单栏按钮](https://cdn.bndou.eu.org/gh/BNDou/getCnkiLiteratureBibTex@main/img/BibTex1.png "菜单栏按钮")
 
 ## 更新日志
+
+### v4.0.0
+- 新增高级检索页面支持
+  - 为每个搜索结果添加复制按钮
+  - 支持批量复制多篇文献的BibTeX
+- 优化BibTeX数据处理
+  - 改进数据提取算法
+  - 优化换行和格式处理
+  - 提升多文献批量处理的稳定性
+- 改进用户体验
+  - 添加复制前的选中检查
+  - 优化按钮位置和样式
+  - 保持与知网原有界面的一致性
 
 ### v3.0.0
 - 全新现代化UI设计
