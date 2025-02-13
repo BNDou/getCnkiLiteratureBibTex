@@ -4,7 +4,6 @@
 // @author       BN_Dou
 // @version      4.0.0
 // @namespace    https://github.com/BNDou/getCnkiLiteratureBibTex
-// @match        https://greasyfork.org/zh-CN/users/883089-bndou
 // @match        https://kns.cnki.net/kcms2/article/abstract?v=*
 // @match        https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=*
 // @match        http://kns.cnki.net/kcms/detail/detail.aspx?dbcode=*
