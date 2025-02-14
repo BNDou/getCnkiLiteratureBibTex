@@ -2,11 +2,12 @@
 // @name         知网-文献-bibtex提取
 // @description  从知网文献中直接复制bibtex
 // @author       BN_Dou
-// @version      4.0.0
+// @version      4.1.0
 // @namespace    https://github.com/BNDou/getCnkiLiteratureBibTex
 // @match        https://kns.cnki.net/kcms2/article/abstract?v=*
 // @match        https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=*
 // @match        http://kns.cnki.net/kcms/detail/detail.aspx?dbcode=*
+// @match        https://kns.cnki.net/kns8s/search*
 // @match        https://kns.cnki.net/kns8s/AdvSearch*
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
 // @icon         https://www.cnki.net/favicon.ico
@@ -23,38 +24,39 @@
     // 样式定义
     const STYLES = {
         button: `
-            width: 85px;
-            height: 32px;
-            border-radius: 16px;
-            background-color: #E3170D;
+            width: 65px;
+            height: 25px;
+            border-radius: 12px;
+            background-color: #0f5de5;
             border: none;
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(227, 23, 13, 0.3);
-            margin-right: 10px;
+            box-shadow: 0 2px 8px rgba(15, 93, 229, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
+            position: relative;
+            z-index: 1;
         `,
         advSearchButton: `
-            width: auto;
+            width: 100%;
             height: 24px;
             padding: 0 8px;
-            border-radius: 4px;
+            border-radius: 8px;
             background-color: #f0f0f0;
             border: 1px solid #ddd;
-            color: #E3170D;
+            color: #0f5de5;
             font-size: 12px;
             font-weight: normal;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-right: 8px;
+            margin: 4px 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -83,7 +85,7 @@
         const button = document.createElement('button');
         button.id = "bibbtn";
         button.title = "点击复制BibTex";
-        button.innerHTML = '<span>📋 BibTex</span>';
+        button.innerHTML = '<span>BibTex</span>';
         button.style.cssText = isAdvSearch ? STYLES.advSearchButton : STYLES.button;
         
         if (isAdvSearch) {
@@ -100,15 +102,15 @@
         } else {
             // 原有页面的悬停效果
             button.addEventListener('mouseover', () => {
-                button.style.backgroundColor = '#B31208';
+                button.style.backgroundColor = '#0d4fc3';
                 button.style.transform = 'translateY(-1px)';
-                button.style.boxShadow = '0 4px 12px rgba(227, 23, 13, 0.4)';
+                button.style.boxShadow = '0 4px 12px rgba(15, 93, 229, 0.4)';
             });
             
             button.addEventListener('mouseout', () => {
-                button.style.backgroundColor = '#E3170D';
+                button.style.backgroundColor = '#0f5de5';
                 button.style.transform = 'translateY(0)';
-                button.style.boxShadow = '0 2px 8px rgba(227, 23, 13, 0.3)';
+                button.style.boxShadow = '0 2px 8px rgba(15, 93, 229, 0.3)';
             });
         }
 
@@ -117,14 +119,35 @@
 
     // 显示复制成功提示
     function showCopySuccess(button) {
-        const originalText = button.innerHTML;
-        button.innerHTML = '<span>✅ 已复制</span>';
-        button.style.animation = 'successPulse 0.5s ease';
-        
-        setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.animation = '';
-        }, 1500);
+        const element = document.getElementById(button);
+        if (!element) return;
+
+        if (button === 'batch_bibbtn_li') {
+            // 批量复制按钮的处理
+            const batchLink = element.querySelector('a');
+            if (!batchLink) return;
+
+            const originalText = batchLink.textContent;
+            batchLink.textContent = '✅ 已复制';
+            batchLink.style.animation = 'successPulse 0.5s ease';
+            
+            setTimeout(() => {
+                batchLink.textContent = originalText;
+                batchLink.style.animation = '';
+            }, 1500);
+        } else {
+            // 普通按钮的处理
+            const originalText = element.innerHTML;
+            // 检查是否为检索页面的按钮
+            const isSearchPageButton = button.startsWith('bibbtn_');
+            element.innerHTML = `<span style="color: ${isSearchPageButton ? '#0f5de5' : 'white'};">✅ 已复制</span>`;
+            element.style.animation = 'successPulse 0.5s ease';
+            
+            setTimeout(() => {
+                element.innerHTML = originalText;
+                element.style.animation = '';
+            }, 1500);
+        }
     }
 
     // 获取BibTex数据
@@ -185,7 +208,7 @@
         const bibtexContent = await getBibTex(filename);
         if (bibtexContent) {
             GM_setClipboard(bibtexContent);
-            showCopySuccess(document.getElementById(buttonId));
+            showCopySuccess(buttonId);
         }
     }
 
@@ -199,7 +222,8 @@
         // 根据页面URL决定按钮添加位置
         const currentURL = window.location.href;
 
-        if (currentURL.includes('https://kns.cnki.net/kns8s/AdvSearch')) {
+        if (currentURL.includes('https://kns.cnki.net/kns8s/AdvSearch') || 
+            currentURL.includes('https://kns.cnki.net/kns8s/search')) {
             // 高级检索页面 - 添加定时检测
             
             // 添加批量操作按钮
@@ -215,7 +239,7 @@
                     const batchLink = document.createElement('a');
                     batchLink.href = 'javascript:void(0)';
                     batchLink.textContent = '批量复制BibTex';
-                    batchLink.style.color = '#E3170D';
+                    batchLink.style.color = '#0f5de5';
                     
                     // 为链接绑定点击事件
                     batchLink.addEventListener('click', () => {
@@ -240,29 +264,50 @@
                 addBatchButton();
                 
                 // 添加单个操作按钮
-                const operatTds = document.getElementsByClassName('operat');
+                const operatElements = document.querySelectorAll('.operat, .opts ul.opts-btn');
                 
-                Array.from(operatTds).forEach((operatTd, index) => {
+                Array.from(operatElements).forEach((element, index) => {
                     // 检查该行是否已有按钮
-                    if (operatTd.querySelector('button[id^="bibbtn_"]')) return;
+                    if (element.querySelector('button[id^="bibbtn_"]')) return;
                     
                     const button = createButton(true);  // 传入true表示是高级检索页面
                     button.id = `bibbtn_${index}`;
                     
-                    const resultItem = operatTd.closest('tr');
-                    if (resultItem) {
-                        const cbItem = resultItem.querySelector('.cbItem');
-                        if (cbItem) {
-                            const filename_param = cbItem.value;
-                            
-                            // 将按钮添加到操作栏的开头
-                            operatTd.insertBefore(button, operatTd.firstChild);
-                            
-                            // 为按钮绑定点击事件
-                            $(`#bibbtn_${index}`).click(() => {
-                                copyBibTex(`bibbtn_${index}`, filename_param);
-                            });
+                    // 为opts创建li元素
+                    if (element.classList.contains('opts-btn')) {
+                        const li = document.createElement('li');
+                        li.appendChild(button);
+                        element.insertBefore(li, element.firstChild);
+                    } else {
+                        element.insertBefore(button, element.firstChild);
+                    }
+                    
+                    let filename_param = '';
+                    if (element.classList.contains('opts-btn')) {
+                        // 对于opts情况，从父级dd中查找cbItem
+                        const dd = element.closest('dd');
+                        if (dd) {
+                            const cbItem = dd.querySelector('.cbItem');
+                            if (cbItem) {
+                                filename_param = cbItem.value;
+                            }
                         }
+                    } else {
+                        // 对于operat情况，从tr中查找cbItem
+                        const resultItem = element.closest('tr');
+                        if (resultItem) {
+                            const cbItem = resultItem.querySelector('.cbItem');
+                            if (cbItem) {
+                                filename_param = cbItem.value;
+                            }
+                        }
+                    }
+                    
+                    if (filename_param) {
+                        // 为按钮绑定点击事件
+                        $(`#bibbtn_${index}`).click(() => {
+                            copyBibTex(`bibbtn_${index}`, filename_param);
+                        });
                     }
                 });
             }
@@ -274,10 +319,18 @@
             // 默认处理
             const otherButtons = document.getElementsByClassName('other-btns')[0];
             if (otherButtons) {
-                const new_ul = document.createElement('ul');
+                // 创建按钮元素
+                const li = document.createElement('li');
+                li.className = 'btn-bibtex';
+                li.style.cssText = `
+                    width: 65px;
+                    height: 25px;
+                `;
                 const button = createButton();
-                new_ul.appendChild(button);
-                otherButtons.appendChild(new_ul);
+                li.appendChild(button);
+
+                // 插入到第一个位置
+                otherButtons.insertBefore(li, otherButtons.firstChild);
                 
                 // 绑定点击事件
                 $("#bibbtn").click(() => copyBibTex());
