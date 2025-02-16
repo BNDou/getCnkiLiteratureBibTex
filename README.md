@@ -30,7 +30,7 @@
 ## 安装
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 或 [脚本猫](https://docs.scriptcat.org/) 浏览器扩展
-2. 点击 [GreasyFork直链安装](https://greasyfork.org/scripts/444428-知网-文献-bibtex提取/code/知网-文献-bibtex提取.user.js "前往安装")
+2. 点击 [GreasyFork 直链安装](https://greasyfork.org/scripts/444428-知网-文献-bibtex提取/code/知网-文献-bibtex提取.user.js "前往安装") 或 [脚本猫 直链安装](https://scriptcat.org/zh-CN/script-show-page/2806 "前往安装")
 
 ## 使用方法
 
