@@ -1,23 +1,22 @@
 // ==UserScript==
 // @name         知网-文献-bibtex提取
-// @description  从知网文献中直接复制引文，支持多种引文格式：BibTeX、GB/T 7714-2015、知网研学、CAJ-CD、MLA、APA、Refworks、EndNote、NoteExpress、NodeFirst
-// @author       BN_Dou
-// @version      4.2.0
 // @namespace    https://github.com/BNDou/getCnkiLiteratureBibTex
-// @match        https://kns.cnki.net/kcms2/article/abstract*
-// @match        https://kns.cnki.net/kcms/detail*
-// @match        https://kns.cnki.net/kns8s/defaultresult/index*
-// @match        https://kns.cnki.net/kns8s/search*
-// @match        https://kns.cnki.net/kns8s/AdvSearch*
-// @require      https://code.jquery.com/jquery-3.6.0.min.js
-// @icon         https://www.cnki.net/favicon.ico
+// @description  从知网文献中直接复制引文，支持多种引文格式：BibTeX、GB/T 7714-2015、知网研学、CAJ-CD、MLA、APA、Refworks、EndNote、NoteExpress、NodeFirst
+// @license      AGPL License
+// @version      4.2.1
+// @author       BN_Dou
+// @match        *://kns.cnki.net/kcms2/article/abstract*
+// @match        *://kns.cnki.net/kcms/detail*
+// @match        *://kns.cnki.net/kns8s/defaultresult/index*
+// @match        *://kns.cnki.net/kns8s/search*
+// @match        *://kns.cnki.net/kns8s/AdvSearch*
 // @grant        GM_registerMenuCommand
 // @grant        GM_setClipboard
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @license      AGPL License
-// @downloadURL https://update.greasyfork.org/scripts/444428/%E7%9F%A5%E7%BD%91-%E6%96%87%E7%8C%AE-bibtex%E6%8F%90%E5%8F%96.user.js
-// @updateURL https://update.greasyfork.org/scripts/444428/%E7%9F%A5%E7%BD%91-%E6%96%87%E7%8C%AE-bibtex%E6%8F%90%E5%8F%96.meta.js
+// @icon         https://www.cnki.net/favicon.ico
+// @downloadURL https://scriptcat.org/scripts/code/2806/%E7%9F%A5%E7%BD%91-%E6%96%87%E7%8C%AE-bibtex%E6%8F%90%E5%8F%96.user.js
+// @updateURL   https://scriptcat.org/scripts/code/2806/%E7%9F%A5%E7%BD%91-%E6%96%87%E7%8C%AE-bibtex%E6%8F%90%E5%8F%96.meta.js
 // ==/UserScript==
 
 (function () {

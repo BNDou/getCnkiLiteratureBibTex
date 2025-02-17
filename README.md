@@ -29,8 +29,9 @@
 
 ## 安装
 
-1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 或 [脚本猫](https://docs.scriptcat.org/) 浏览器扩展
-2. 点击 [GreasyFork 直链安装](https://greasyfork.org/scripts/444428-知网-文献-bibtex提取/code/知网-文献-bibtex提取.user.js "前往安装") 或 [脚本猫 直链安装](https://scriptcat.org/zh-CN/script-show-page/2806 "前往安装")
+1. 推荐安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展。
+    -  [脚本猫](https://docs.scriptcat.org/) 也可以用，但是我在测试的时候发现因为文档描述里面使用不同的 `run-at` 会导致 `Tampermonkey` 或 `脚本猫` 其中一方无法正常运行，设置 `document-start` 时，`脚本猫` 可以用，但是 `Tampermonkey` 不能用，设置 `document-end` 则相反。所以能力有限不知道什么原因，有朋友知道原因的可以反馈学习一下。
+2. 点击 [GreasyFork 直链安装](https://greasyfork.org/scripts/444428-知网-文献-bibtex提取/code/知网-文献-bibtex提取.user.js "前往安装") 或 [脚本猫 直链安装](https://scriptcat.org/zh-CN/script-show-page/2806 "前往安装") 。
 
 ## 使用方法
 
